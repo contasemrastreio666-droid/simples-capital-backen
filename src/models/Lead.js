@@ -1,5 +1,23 @@
 import mongoose from 'mongoose'
 
+const simulationSchema = new mongoose.Schema(
+  {
+    requestedAmount: String,
+    termMonths: String,
+    profileType: String,
+    historyLevel: String,
+    urgency: String,
+    monthlyRate: Number,
+    installment: Number,
+    totalPayment: Number,
+    totalInterest: Number,
+    annualRate: Number,
+    cetMonthly: Number,
+    cetAnnual: Number,
+  },
+  { _id: false }
+)
+
 const leadSchema = new mongoose.Schema(
   {
     fullName: { type: String, required: true, trim: true },
@@ -8,12 +26,9 @@ const leadSchema = new mongoose.Schema(
     birthDate: { type: String, required: true, trim: true },
     cpf: { type: String, required: true, trim: true },
     cnh: { type: String, required: true, trim: true },
-    simulation: {
-      desiredAmount: { type: String, trim: true },
-      urgency: { type: String, trim: true },
-      profileType: { type: String, trim: true },
-      historyLevel: { type: String, trim: true },
-    },
+    cnhFrontUrl: { type: String, required: true },
+    cnhBackUrl: { type: String, required: true },
+    simulation: simulationSchema,
     status: {
       type: String,
       enum: ['novo', 'em_contato', 'convertido', 'arquivado'],
